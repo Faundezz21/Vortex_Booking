@@ -1,0 +1,85 @@
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
+
+@source "../views";
+@source "../../app";
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Estilo de app de producto: superficies blancas, grises neutros, un azul de marca
+ * y colores por sala en el calendario. Densidad media, tipografía Inter.
+ */
+@theme {
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+    --color-brand: #2f6feb;
+    --color-brand-hover: #255fd6;
+    --color-brand-soft: #eaf1fe;
+
+    --color-accent: #2f6feb;
+    --color-accent-content: #2563eb;
+    --color-accent-foreground: #ffffff;
+}
+
+@layer theme {
+    .dark {
+        --color-brand: #5b8ff9;
+        --color-brand-hover: #74a1fa;
+        --color-brand-soft: #1b2a45;
+
+        --color-accent: #5b8ff9;
+        --color-accent-content: #7aa5fb;
+        --color-accent-foreground: #ffffff;
+    }
+}
+
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-zinc-200, currentColor);
+    }
+
+    .dark *,
+    .dark ::after,
+    .dark ::before {
+        border-color: var(--color-zinc-800, currentColor);
+    }
+
+    body {
+        font-feature-settings: 'cv11', 'ss01';
+    }
+}
+
+[data-flux-field] {
+    @apply grid gap-2;
+}
+
+[data-flux-label] {
+    @apply !mb-0 !leading-tight;
+}
+
+input:focus[data-flux-control],
+textarea:focus[data-flux-control],
+select:focus[data-flux-control] {
+    @apply outline-hidden ring-2 ring-accent/40 ring-offset-0;
+}
+
+/* Bloque ocupado: rayado diagonal suave. */
+@utility hatched {
+    background-image: repeating-linear-gradient(
+        135deg,
+        transparent 0 6px,
+        color-mix(in oklab, currentColor 10%, transparent) 6px 7px
+    );
+}
+
+/* Controles nativos (select, date) con el mismo aspecto que Flux. */
+@utility field {
+    @apply h-9 rounded-lg border border-zinc-200 bg-white px-3 text-sm text-zinc-800 shadow-xs outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:[color-scheme:dark];
+}
