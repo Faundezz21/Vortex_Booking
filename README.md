@@ -10,6 +10,10 @@
 
 ---
 
+<p align="center">
+  <img src="docs/captura.webp" alt="Calendario semanal de Vortex Booking con reservas por sala" width="100%" />
+</p>
+
 ## Funcionalidades
 
 **Para estudiantes**
